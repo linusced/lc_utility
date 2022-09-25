@@ -4,10 +4,8 @@ lc_utility::FilePath::FilePath(const FilePath &fp)
     : str(fp.str) {}
 
 lc_utility::FilePath::FilePath(const std::string &str)
-    : str(str)
 {
-    if (this->str.back() == '/')
-        this->str.resize(this->str.size() - 1);
+    addStr(str);
 }
 
 lc_utility::FilePath::FilePath(const char *c_str)
@@ -32,11 +30,31 @@ void lc_utility::FilePath::operator+=(const std::string &str)
 
 void lc_utility::FilePath::addStr(const std::string &str)
 {
-    if (str.front() != '/')
+    if (!this->str.empty() && str.front() != '/')
         this->str += '/';
 
     this->str += str;
 
-    if (this->str.back() == '/')
-        this->str.resize(this->str.size() - 1);
+    if (this->str.back() != '/')
+        this->str += '/';
+
+    size_t prevSlashIndex = this->str.find('/', 0) + 1,
+           slashIndex = this->str.find('/', prevSlashIndex) + 1,
+           nextSlashIndex = this->str.find('/', slashIndex);
+
+    while (nextSlashIndex != std::string::npos)
+    {
+        auto dir = this->str.substr(slashIndex, nextSlashIndex - slashIndex);
+        if (dir == "..")
+        {
+            this->str = this->str.substr(0, prevSlashIndex) + this->str.substr(nextSlashIndex + 1);
+            slashIndex = this->str.find('/', 0) + 1;
+        }
+
+        prevSlashIndex = slashIndex;
+        slashIndex = this->str.find('/', slashIndex) + 1;
+        nextSlashIndex = this->str.find('/', slashIndex);
+    }
+
+    this->str.resize(this->str.size() - 1);
 }

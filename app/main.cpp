@@ -27,5 +27,11 @@ int main(int argc, char const *argv[])
     f += "tjena.dat";
 
     std::cout << f << '\n';
+
+    auto f2 = assets;
+    f2 += "../../test/vadim/kebab.txt";
+    std::cout << f2 << '\n';
+    f2 += "../fisk.txt";
+    std::cout << f2 << '\n';
     return 0;
 }
