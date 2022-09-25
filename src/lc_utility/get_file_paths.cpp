@@ -1,4 +1,4 @@
-#include "lc_utility/filesystem.hpp"
+#include "lc_utility/get_file_paths.hpp"
 
 std::string lc_utility::getAssetsFilePath()
 {

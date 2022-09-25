@@ -6,14 +6,6 @@
 #include <CoreServices/CoreServices.h>
 #endif
 
-#ifdef __unix
-#error lc_utility::filesystem is not supported on Linux
-#endif
-
-#ifdef _WIN32
-#error lc_utility::filesystem is not supported on Windows
-#endif
-
 namespace lc_utility
 {
     std::string getAssetsFilePath();
