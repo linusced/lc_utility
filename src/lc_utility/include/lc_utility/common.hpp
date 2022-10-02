@@ -6,3 +6,4 @@
 #include <fstream>
 #include <filesystem>
 #include <iostream>
+#include <string.h>
