@@ -23,7 +23,7 @@ namespace lc_utility
             if (readIndex + bytesSize > bytes.size())
                 throw std::invalid_argument("lc_utility::BytesArrRead::read End of file reached!");
 
-            std::memcpy(data, bytes.data() + readIndex, bytesSize);
+            memcpy(data, bytes.data() + readIndex, bytesSize);
             readIndex += bytesSize;
         }
 
@@ -65,7 +65,7 @@ namespace lc_utility
 
             size_t i = bytes.size(), bytesSize = sizeof(T) * arrSize;
             bytes.resize(i + bytesSize);
-            std::memcpy(bytes.data() + i, data, bytesSize);
+            memcpy(bytes.data() + i, data, bytesSize);
         }
 
         template <typename T>
